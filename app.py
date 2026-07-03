@@ -98,10 +98,7 @@ DEFAULT_RATING = 3
 # Google Sheets connection
 # --------------------------------------------------------------------------
 
-SCOPES = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive",
-]
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 
 @st.cache_resource(show_spinner=False)
