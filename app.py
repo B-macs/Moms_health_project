@@ -155,7 +155,11 @@ with st.form("checkin_form", clear_on_submit=True):
             key=q["key"],
             label_visibility="collapsed",
         )
-        st.caption(f"**{rating} - {q['labels'][rating]}**")
+        for n, text in q["labels"].items():
+            if n == rating:
+                st.caption(f"**{n} - {text}**")
+            else:
+                st.caption(f"{n} - {text}")
         answers[q["key"]] = rating
 
         st.divider()
@@ -179,7 +183,7 @@ if submitted:
         except Exception:
             st.error(
                 "⚠️ Sorry, something went wrong saving your check-in. "
-                "Please try again in a moment, or let your daughter know."
+                "Please try again in a moment, or let your son know."
             )
         else:
             st.success("✅ Saved — thank you!")
