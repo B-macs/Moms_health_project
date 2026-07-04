@@ -4,12 +4,17 @@ A simple mobile-friendly Streamlit form that records a 5-question wellness
 check-in to a Google Sheet, one row per submission.
 """
 
+import logging
+import traceback
 from datetime import datetime
 
 import gspread
 import streamlit as st
 from google.oauth2.service_account import Credentials
 from zoneinfo import ZoneInfo
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # --------------------------------------------------------------------------
 # Config
@@ -178,6 +183,7 @@ if submitted:
         try:
             append_checkin(answers, notes.strip())
         except Exception:
+            logger.error("Failed to save check-in:\n%s", traceback.format_exc())
             st.error(
                 "⚠️ Sorry, something went wrong saving your check-in. "
                 "Please try again in a moment, or let your son know."
